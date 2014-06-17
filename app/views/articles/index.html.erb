@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-5">
+          Articles List
+        </div>
+        <div class="col-md-5" style="text-align:right">
+            <h3><span class="label label-success"><%= link_to 'New article', new_article_path %></span></h3>
+
+        </div>
+
+      </div>
+    </div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            
+            <th>Title</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+      <td><%= article.title %></td>
+      
+      <td><span class="label label-info"><%= link_to 'Read', article_path(article) %></span></td>
+      <td><span class="label label-warning"><%= link_to 'Edit', edit_article_path(article) %></span></td>
+      <td><span class="label label-danger"><%= link_to 'Delete', article_path(article), method: :delete, data: {confirm: 'Are you sure? ' } %></span></td> 
+    </tr>
+  <% end %>
+        </tbody>
+      </table>
+    </div>
+  

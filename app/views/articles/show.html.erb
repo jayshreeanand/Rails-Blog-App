@@ -1,0 +1,56 @@
+            <h2 class="blog-post-title"><%= @article.title %></h2>
+            <p class="blog-post-meta"><%= @article.created_at %></a></p>
+
+            <p><%= @article.text %></p>
+<div class="row">
+  <div class="col-md-10">
+<span class="label label-info "><%= link_to 'Edit this Article', edit_article_path(@article) %></span>
+</div>
+<span class="label label-info"><%= link_to 'Back', articles_path %></span>
+</div>
+
+</br>
+ <h3>Comment section</h3>
+<% @article.comments.each do |comment| %>
+<div class="well">
+
+  <div class="row col-md-12">
+    <blockquote><%= comment.body %></blockquote>
+  </div>
+  <div class="row">
+    <div class="col-md-5" style="text-align:right">
+      <p>-<%= comment.commenter %></p>
+    </div>
+    <div class="col-md-7" style="text-align:right">
+      <span class="label label-danger"><%= link_to 'Delete', [comment.article, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %></span>
+    </div>
+  </div>
+</div>
+
+  
+
+<% end %>
+
+
+
+<div class="col-md-9">
+</br>
+Add a comment:
+
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  
+    <h4>Name</h4>
+    <%= f.text_field :commenter, :class =>"form-control" %>
+  <br>
+    <h4>Comment</h4>
+    <%= f.text_area :body, :class =>"form-control", :rows =>"4" %>
+  
+  <br>
+    <%= submit_tag "Post Comment", class: "btn btn-md btn-success" %>
+    
+  
+<% end %>
+</div>
+ 
